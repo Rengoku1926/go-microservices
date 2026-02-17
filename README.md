@@ -2,6 +2,8 @@
 
 This is the starter code for the "Microservices with Go" project.
 
+git remote set-url origin git@github-rengoku:Rengoku1926/go-microservices.git
+
 ## Project overview
 
 In this project‑driven course, you’ll build the backend microservices system for a Uber‑style ride‑sharing app from the ground up—using Go, Docker, and Kubernetes.
