@@ -3,6 +3,7 @@
 This is the starter code for the "Microservices with Go" project.
 
 git remote set-url origin git@github-rengoku:Rengoku1926/go-microservices.git
+the above is the git command
 
 ## Project overview
 
