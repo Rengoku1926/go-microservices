@@ -58,10 +58,10 @@ You can either install via WSL (recommended) or using powershell (not covered, b
 5. Install Go on Windows using WSL:
 ```bash
 # 1. Get the Go binary
-wget https://dl.google.com/go/go1.23.0.linux-amd64.tar.gz
+wget https://dl.google.com/go/go1.23.0.linux-arm64.tar.gz
 
 # 2. Extract the tarball
-sudo tar -xvf go1.23.0.linux-amd64.tar.gz
+sudo tar -xvf go1.23.0.linux-arm64.tar.gz
 
 # 3. Move the extracted folder to /usr/local
 sudo mv go /usr/local
@@ -116,16 +116,16 @@ Production folder needs to contain a secrets.yaml for the production environment
 Build all docker images and tag them accordingly to push to Artifact Registry.
 ```bash
 # Build the Api gateway 
-docker build -t {REGION}-docker.pkg.dev/{PROJECT_ID}/ride-sharing/api-gateway:latest --platform linux/amd64 -f infra/production/docker/api-gateway.Dockerfile .
+docker build -t {REGION}-docker.pkg.dev/{PROJECT_ID}/ride-sharing/api-gateway:latest --platform linux/arm64 -f infra/production/docker/api-gateway.Dockerfile .
 
 # Build the Driver service 
-docker build -t {REGION}-docker.pkg.dev/{PROJECT_ID}/ride-sharing/driver-service:latest --platform linux/amd64 -f infra/production/docker/driver-service.Dockerfile .
+docker build -t {REGION}-docker.pkg.dev/{PROJECT_ID}/ride-sharing/driver-service:latest --platform linux/arm64 -f infra/production/docker/driver-service.Dockerfile .
 
 # Build the Trip service 
-docker build -t {REGION}-docker.pkg.dev/{PROJECT_ID}/ride-sharing/trip-service:latest --platform linux/amd64 -f infra/production/docker/trip-service.Dockerfile .
+docker build -t {REGION}-docker.pkg.dev/{PROJECT_ID}/ride-sharing/trip-service:latest --platform linux/arm64 -f infra/production/docker/trip-service.Dockerfile .
 
 # Build the Payment service 
-docker build -t {REGION}-docker.pkg.dev/{PROJECT_ID}/ride-sharing/payment-service:latest --platform linux/amd64 -f infra/production/docker/payment-service.Dockerfile .
+docker build -t {REGION}-docker.pkg.dev/{PROJECT_ID}/ride-sharing/payment-service:latest --platform linux/arm64 -f infra/production/docker/payment-service.Dockerfile .
 ```
 
 ## 3. Create a Artifact Registry repository
