@@ -12,9 +12,14 @@ spec:
       labels:
         app: trip-service
     spec:
+      tolerations:
+        - key: "kubernetes.io/arch"
+          operator: "Equal"
+          value: "arm64"
+          effect: "NoSchedule"
       containers:
         - name: trip-service
-          image: europe-west1-docker.pkg.dev/{{PROJECT_ID}}/ride-sharing/trip-service
+          image: asia-south1-docker.pkg.dev/project-af8a8fc1-6435-4ae4-9e6/ride-sharing/trip-service
           ports:
             - containerPort: 8083
           resources:

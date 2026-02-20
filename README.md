@@ -242,3 +242,10 @@ https://<IP_ADDRESS>
 Note: Since this is using a self-signed certificate, browsers will show a security warning. This is normal and expected. You can:
 Accept the warning in your browser (not recommended for production)
 Use a proper domain name (recommended for production)
+
+gcloud container clusters create ride-sharing \
+  --region us-central1 \
+  --machine-type t2a-standard-1 \
+  --num-nodes 1 \
+  --disk-size 20
+

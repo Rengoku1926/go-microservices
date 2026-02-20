@@ -12,9 +12,14 @@ spec:
       labels:
         app: api-gateway
     spec:
+      tolerations:
+        - key: "kubernetes.io/arch"
+          operator: "Equal"
+          value: "arm64"
+          effect: "NoSchedule"
       containers:
         - name: api-gateway
-          image: europe-west1-docker.pkg.dev/{{PROJECT_ID}}/ride-sharing/api-gateway
+          image: asia-south1-docker.pkg.dev/project-af8a8fc1-6435-4ae4-9e6/ride-sharing/api-gateway
           ports:
             - containerPort: 8081
           env:
@@ -30,6 +35,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "125m"
+
 ---
 apiVersion: v1
 kind: Service
