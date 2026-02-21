@@ -249,3 +249,8 @@ gcloud container clusters create ride-sharing \
   --num-nodes 1 \
   --disk-size 20
 
+
+  docker build -t asia-south1-docker.pkg.dev/project-af8a8fc1-6435-4ae4-9e6/ride-sharing/api-gateway:latest --platform linux/arm64 -f infra/production/docker/api-gateway.Dockerfile .
+
+docker build -t asia-south1-docker.pkg.dev/project-af8a8fc1-6435-4ae4-9e6/ride-sharing/trip-service:latest --platform linux/arm64 -f infra/production/docker/trip-service.Dockerfile .
+

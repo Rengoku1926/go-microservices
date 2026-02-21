@@ -18,6 +18,12 @@ spec:
           imagePullPolicy: Never
           ports:
             - containerPort: 9092
+          env:
+            - name: RABBITMQ_URI
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-credentials
+                  key: uri
           resources:
             requests:
               memory: "64Mi"
@@ -25,6 +31,7 @@ spec:
             limits:
               memory: "128Mi"
               cpu: "200m"
+     
 ---
 apiVersion: v1
 kind: Service

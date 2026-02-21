@@ -17,6 +17,12 @@ spec:
           image: ride-sharing/trip-service
           ports:
             - containerPort: 9093
+          env:
+            - name: RABBITMQ_URI
+              valueFrom:
+                secretKeyRef:
+                  name: rabbitmq-credentials
+                  key: uri
           resources:
             requests:
               memory: "64Mi"
