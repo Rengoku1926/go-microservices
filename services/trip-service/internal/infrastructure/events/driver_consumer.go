@@ -1,4 +1,3 @@
-
 package events
 
 import (
@@ -61,10 +60,9 @@ func (c *driverConsumer) Listen() error {
 	})
 }
 
-
 func (c *driverConsumer) handleTripDeclined(ctx context.Context, tripID, riderID string) error {
 	// When a driver declines, we should try to find another driver
-	
+
 	trip, err := c.service.GetTripByID(ctx, tripID)
 	if err != nil {
 		return err
@@ -122,12 +120,27 @@ func (c *driverConsumer) handleTripAccepted(ctx context.Context, tripID string, 
 	// Notify the rider that a driver has been assigned
 	if err := c.rabbitmq.PublishMessage(ctx, contracts.TripEventDriverAssigned, contracts.AmqpMessage{
 		OwnerID: trip.UserID,
-		Data: marshalledTrip,
+		Data:    marshalledTrip,
 	}); err != nil {
 		return err
 	}
 
-	// TODO: Notify the payment service to start a payment link
+	marshalledPayload, err := json.Marshal(messaging.PaymentTripResponseData{
+		TripID:   tripID,
+		UserID:   trip.UserID,
+		DriverID: driver.Id,
+		Amount:   trip.RideFare.TotalPriceInCents,
+		Currency: "USD",
+	})
+
+	if err := c.rabbitmq.PublishMessage(ctx, contracts.PaymentCmdCreateSession,
+		contracts.AmqpMessage{
+			OwnerID: trip.UserID,
+			Data:    marshalledPayload,
+		},
+	); err != nil {
+		return err
+	}
 
 	return nil
 }
